@@ -6,20 +6,20 @@ django.setup()
 from rango.models import Category, Page
 
 def populate():
-
     python_pages = [
-        {'title': 'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/'}, 
-        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/'}, 
-        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/'}]
-    
+        {"title": "Official Python Tutorial","url":"http://docs.python.org/2/tutorial/","views":17},
+        {"title":"How to Think like a Computer Scientist","url":"http://www.greenteapress.com/thinkpython/","views":90},
+        {"title":"Learn Python in 10 Minutes","url":"http://www.korokithakis.net/tutorials/python/","views":88}]
+
     django_pages = [
-        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/'}, 
-        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/'}, 
-        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/'}]
+        {"title":"Official Django Tutorial","url":"https://docs.djangoproject.com/en/1.9/intro/tutorial01/","views":22},
+        {"title":"Django Rocks","url":"http://www.djangorocks.com/","views":81},
+        {"title":"How to Tango with Django","url":"http://www.tangowithdjango.com/","views":68}]
 
     other_pages = [
-       {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/'}, 
-       {'title':'Flask', 'url':'http://flask.pocoo.org'} ]
+        {"title":"Bottle","url":"http://bottlepy.org/docs/dev/","views":99},
+        {"title":"Flask","url":"http://flask.pocoo.org","views":33}]
+    
 
     cats = {'Python': {'pages': python_pages,'views':128,'likes':64},
             'Django': {'pages': django_pages,'views':64,'likes':32}, 
@@ -28,8 +28,8 @@ def populate():
     # Go through the cats dictionary, then add each category, then add all the relevant pages for this category
     for cat,cat_data in cats.items():
         c = add_cat(cat,cat_data['views'],cat_data['likes'])
-        for p in cat_data['pages']:
-            add_page(c,p['title'],p['url'])
+        for p in cat_data["pages"]:
+            add_page(c,p["title"],p["url"],p["views"])
 
     # Print out the categories which had added
     for c in Category.objects.all():
