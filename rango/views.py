@@ -17,12 +17,14 @@ def index(request):
 
     return render(request, 'rango/index.html', context=context_dict)
 
+
 def about(request):
-    return render(request, 'rango/about.html')
-    # return HttpResponse("Rango says here is the about page." + '<a href=\'/rango/\'>Index</a>')
+    print(request.method)
+    print(request.user)
+    return render(request, 'rango/about.html', {})
+
 
 def show_category(request, category_name_slug):
-
 	context_dict = {}
 
 	try:
@@ -39,6 +41,7 @@ def show_category(request, category_name_slug):
 		context_dict['pages'] = None
 
 	return render(request, 'rango/category.html', context=context_dict)
+
 
 def add_category(request):
     form = CategoryForm()
